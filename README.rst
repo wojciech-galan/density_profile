@@ -1,7 +1,7 @@
 .. -*- mode: rst -*-
 density_profile
 ====
-This is a simple script creating water and POPC density profile along Z axis from .gro files. The script is intended to be used to 
+This is a simple script creating water and POP3 density profile along Z axis from .gro files. The script is intended to be used to 
 process files obtained with https://github.com/wojciech-galan/gro_cutter
 
 How to use
