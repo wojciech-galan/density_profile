@@ -10,3 +10,8 @@ First make sure that you have Python 2.7, numpy and https://github.com/wojciech-
 density_profile.py script and run it: ::
 
     python density_profile.py -i INFILE -o OUTFILE -t TPRFILE
+
+where:
+- INFILE - path to the input file
+- OUTFILE - path to the output file
+- TPRFILE - path to the .tpr file
