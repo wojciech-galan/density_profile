@@ -21,6 +21,20 @@ def parse_xvg(fname):
     return ret_arr
 
 
+def get_name_and_extension(fpath):
+    """
+
+    :param fpath: path to a file
+    :return: (name of the file, extension) without directories in the path
+    """
+    name = os.path.basename(fpath)
+    split = name.split('.')
+    if len(split) > 1:
+        return split
+    else:
+        return split[0], ''
+
+
 def main(args=sys.argv[1:]):
     parser = argparse.ArgumentParser(description='blah') # TODO meaningful description
     parser.add_argument('-i', required=True, help="input file")
@@ -29,8 +43,7 @@ def main(args=sys.argv[1:]):
     args = parser.parse_args(args)
     temp_dir = tempfile.mkdtemp()
     for i, frame in enumerate(get_frames(args.i)):
-        name = os.path.basename(args.i)
-        base, extension = name.split('.')
+        base, extension = get_name_and_extension(args.i)
         temp_name = os.path.join(os.path.join(temp_dir, base+'_'+str(i)+'.'+extension))
         index_name = os.path.join(os.path.join(temp_dir, base+'_'+str(i)+'.ndx'))
         out_part_name = os.path.join(os.path.join(temp_dir, base+'_'+str(i)+'.xvg'))
