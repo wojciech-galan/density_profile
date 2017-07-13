@@ -44,6 +44,7 @@ def main(args=sys.argv[1:]):
     temp_dir = tempfile.mkdtemp()
     for i, frame in enumerate(get_frames(args.i)):
         base, extension = get_name_and_extension(args.i)
+        extension = extension or 'gro'
         temp_name = os.path.join(os.path.join(temp_dir, base+'_'+str(i)+'.'+extension))
         index_name = os.path.join(os.path.join(temp_dir, base+'_'+str(i)+'.ndx'))
         out_part_name = os.path.join(os.path.join(temp_dir, base+'_'+str(i)+'.xvg'))
