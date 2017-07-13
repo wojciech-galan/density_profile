@@ -65,7 +65,7 @@ def main(args=sys.argv[1:]):
         arr.append(parse_xvg(os.path.join(temp_dir, f)))
     # https://stackoverflow.com/questions/2828059/sorting-arrays-in-numpy-by-column
     # sorted_arr = np.sort(np.concatenate(arr).view('f8,f8,f8'), order=['f1'], axis=0).view(np.float)
-    np.savetxt(open(args.o, 'wb'), np.concatenate(arr), fmt='%.6f')
+    np.savetxt(open(args.o, 'wb'), np.mean(arr, axis=0), fmt='%.6f')
     shutil.rmtree(temp_dir)
 
 if __name__ == '__main__':
