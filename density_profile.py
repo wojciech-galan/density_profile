@@ -11,7 +11,7 @@ import numpy as np
 from gro_cutter.walec import get_frames
 
 make_ndx = 'gmx make_ndx -f %s -o %s'
-density = 'gmx density -f %s -s %s -n %s -o %s -ng 2'
+density = 'gmx density -f %s -s %s -n %s -o %s -ng 2 -d %s'
 
 def parse_xvg(fname):
     ret_arr = np.empty((50, 3), dtype='float32')
@@ -40,6 +40,7 @@ def main(args=sys.argv[1:]):
     parser.add_argument('-i', required=True, help="input file")
     parser.add_argument('-o', required=True, help="output file")
     parser.add_argument('-t', required=True, help='.tpr file')
+    parser.add_argument('-d', required=True, help='axis', choices=['X', 'Y', 'Z'])
     args = parser.parse_args(args)
     temp_dir = tempfile.mkdtemp()
     for i, frame in enumerate(get_frames(args.i)):
@@ -54,7 +55,7 @@ def main(args=sys.argv[1:]):
         p.stdin.write("13 & a P O12 O13 O14\n")
         p.stdin.write("q\n")
         p.wait()
-        p = subprocess.Popen(density%(temp_name, args.t, index_name, out_part_name), stdin=subprocess.PIPE,
+        p = subprocess.Popen(density%(temp_name, args.t, index_name, out_part_name, args.d), stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
         p.stdin.write("15\n")
         p.stdin.write("14\n")
